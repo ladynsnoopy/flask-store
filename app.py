@@ -10,7 +10,10 @@ from resources.store import Store, StoreList
 
 app=Flask(__name__)
 #_--------------------------------------gonna be at root folder-------
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///data.db')
+database_url = os.environ.get('DATABASE_URL', 'sqlite:///data.db')
+changed_url = database_url.replace("postgres://", "postgresql://")
+
+app.config['SQLALCHEMY_DATABASE_URI'] = changed_url
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['PROPAGATE_EXCEPTIONS'] = True
 app.secret_key = 'myat'
